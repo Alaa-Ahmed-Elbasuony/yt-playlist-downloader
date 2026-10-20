@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>YT Playlist Downloader</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>YouTube Downloader</h1>
+    <span id="badge" class="badge" hidden></span>
+  </header>
+
+  <!-- New download -->
+  <section id="form">
+    <div class="step">
+      <div class="step-label"><b>1</b> What do you want to download?</div>
+      <div class="seg" id="mode">
+        <button type="button" data-value="video">Video</button>
+        <button type="button" data-value="playlist">Playlist</button>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-label"><b>2</b> <span id="url-label">Paste the link</span></div>
+      <input id="url" type="url" placeholder="https://www.youtube.com/…" spellcheck="false" autocomplete="off">
+      <div id="info" class="info" hidden>
+        <div id="info-title" class="info-title"></div>
+        <div id="info-meta" class="muted"></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-label"><b>3</b> Choose format</div>
+      <div class="seg" id="kind">
+        <button type="button" data-value="video">Video (mp4)</button>
+        <button type="button" data-value="audio">Audio (mp3)</button>
+      </div>
+      <label class="field">
+        <span>Quality</span>
+        <select id="quality"></select>
+      </label>
+      <div class="field">
+        <span>Save to folder</span>
+        <div class="folder-row">
+          <input id="folder" type="text" placeholder="Default: Downloads\YouTube" spellcheck="false" autocomplete="off" aria-label="Download folder">
+          <button type="button" id="browse" title="Choose a folder on this computer">Browse…</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Single video -->
+    <button id="download" class="primary" disabled>Download</button>
+
+    <!-- Playlist -->
+    <div id="playlist" class="step" hidden>
+      <div class="step-label"><b>4</b> Download all, or pick a video</div>
+      <button id="download-all" class="primary">Download all</button>
+      <div id="total-size" class="total muted"></div>
+      <input id="filter" type="search" placeholder="Search videos in this playlist…" spellcheck="false" autocomplete="off">
+      <ul id="video-list" class="video-list"></ul>
+    </div>
+  </section>
+
+  <!-- Running / finished job -->
+  <section id="job" hidden>
+    <div id="job-title" class="info-title"></div>
+    <div id="job-line" class="muted"></div>
+    <div id="job-video" class="video"></div>
+
+    <div id="progress" class="progress">
+      <div class="pct-row">
+        <span id="pct" class="pct"></span>
+        <span id="job-stats" class="stats muted"></span>
+      </div>
+      <div id="bar" class="bar"><div id="bar-fill" class="bar-fill"></div></div>
+      <div id="overall" class="overall" hidden>
+        <div class="overall-head"><span>Whole playlist</span><span id="overall-pct"></span></div>
+        <div class="bar thin"><div id="overall-fill" class="bar-fill"></div></div>
+      </div>
+    </div>
+
+    <div id="result" class="result" hidden>
+      <p id="result-summary"></p>
+      <details id="skipped" hidden>
+        <summary id="skipped-summary"></summary>
+        <ul id="skipped-list"></ul>
+      </details>
+      <ul id="errors" class="errors" hidden></ul>
+      <p id="result-folder" class="muted path"></p>
+    </div>
+
+    <div id="open-row" class="open-row" hidden>
+      <button type="button" id="open-file">Show file</button>
+      <button type="button" id="open-folder">Open folder</button>
+    </div>
+    <button id="cancel" class="danger">Cancel</button>
+    <button id="again" class="primary" hidden>Another download</button>
+  </section>
+
+  <footer class="copyright">© 2026 Alaa El-Basuony. All rights reserved.</footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
